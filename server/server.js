@@ -3,8 +3,9 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var config = require('./config');
 var app = express();
-
 var braintree = require("braintree");
+var aws = require("aws-lib");
+var beautifier = require("beautifier");
 
 var gateway = braintree.connect({
     environment: braintree.Environment.Sandbox,
@@ -13,7 +14,40 @@ var gateway = braintree.connect({
     privateKey: config.privateKey
 });
 
+function getProductData() {
 
-http.createServer(app).listen(8080, function(){
-    console.log('Listening on port 8080');
+
+    // return result ;
+    return 1;
+}
+
+
+var baseproductASIN = "B00IK01PJC";
+var baseproductASIN = "B00JLT24BY";
+var baseproductASIN2 = "B00C2QNGYC";
+
+app.use(bodyParser.json());
+
+app.get('/nextProduct', function(req, res, next) {
+    console.log('Hi from express!');
+    var data = getProductData();
+    console.log(data);
+
+    prodAdv = aws.createProdAdvClient(config.accessKeyId, config.secretAccessKey, config.associateTag);
+
+    prodAdv.call("SimilarityLookup", {
+        ItemId: baseproductASIN2,
+        MerchantId: "Amazon",
+        SimilarityType: "Random",
+        ResponseGroup: "Request,Similarities,Images"
+    }, function (err, result) {
+        var items = result.Items['Item'];
+        var rand = Math.floor((Math.random() * items.length));
+        console.log("Chosen random number: " + rand);
+        var imageURL = items[rand].LargeImage.URL;
+        console.log(JSON.stringify(imageURL));
+        res.status(200).json(imageURL);
+    });
 });
+
+http.createServer(app).listen(8080);
