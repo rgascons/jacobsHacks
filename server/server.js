@@ -42,11 +42,11 @@ app.get('/nextProduct', function(req, res, next) {
         ResponseGroup: "Request,Similarities,Images"
     }, function (err, result) {
         var items = result.Items['Item'];
-        var rand = Math.floor((Math.random() * items.length));
-        console.log("Chosen random number: " + rand);
-        var imageURL = items[rand].LargeImage.URL;
+        var randItem = items[Math.floor((Math.random() * items.length))];
+        var imageURL = randItem.LargeImage.URL;
         console.log(JSON.stringify(imageURL));
-        res.status(200).json(imageURL);
+        r = {imageURL: imageURL};
+        res.status(200).json(randItem);
     });
 });
 
