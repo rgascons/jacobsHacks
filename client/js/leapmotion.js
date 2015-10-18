@@ -21,6 +21,17 @@ function onFrame(frame)
                     swipeRight();
                 }
             }
+            else if(frame.gestures[0].direction[0] < 0) {
+                var oldFrame = controller.frame(1);
+                if (oldFrame.gestures.length > 0) {
+                    if(oldFrame.gestures[0].type == "swipe" && oldFrame.gestures[0].direction[0] < 0) {
+                    }
+                    else swipeLeft();
+                }
+                else {
+                    swipeLeft();
+                }
+            }
         }
     }
 }
