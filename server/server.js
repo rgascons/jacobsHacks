@@ -16,19 +16,20 @@ var gateway = braintree.connect({
     privateKey: config.privateKey
 });
 
-var baseproductASIN = "B00IK01PJC";
-var baseproductASIN = "B00JLT24BY";
-var baseproductASIN2 = "B00C2QNGYC";
+var baseProducts = ["B00IK01PJC","B00JLT24BY","B00C2QNGYC","B00A6TNDAY","B013RMG6SM",
+    "B00V6WSHZG","B004UPU06K","B007N9OWKU","B004RBDKQ4",
+    "B00B0FV4FE","B00NAX637I","B001FVRUFQ","B004LUY9TS",
+    "B00175TFU8","B00YIHH5KO","B01473TI3A","B00H8YHRU2","B00FX0G9UW"];
 
 app.use(bodyParser.json());
 
 app.get('/nextProduct', function(req, res, next) {
     console.log('Hi from express!');
-    var data = getProductData();
-    console.log(data);
 
     prodAdv = aws.createProdAdvClient(config.accessKeyId, config.secretAccessKey, config.associateTag);
-
+    //var baseproductASIN2 = baseProducts[Math.floor(Math.random() * baseProducts.length)];
+    var baseproductASIN2 = "B00C2QNGYC";
+    console.log(baseproductASIN2);
     prodAdv.call("SimilarityLookup", {
         ItemId: baseproductASIN2,
         MerchantId: "Amazon",
@@ -54,6 +55,7 @@ app.get('/nextProduct', function(req, res, next) {
                 var title = expectedItem.ItemAttributes.Title;
                 var price = expectedItem.ItemAttributes.ListPrice.FormattedPrice;
                 var wishlistLink = expectedItem.ItemLinks.ItemLink[3].URL;
+                var productLink = expectedItem.ItemLinks.ItemLink[3].URL;
                 console.log(JSON.stringify(imageURL));
                 r = {
                     title: title,

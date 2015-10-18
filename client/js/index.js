@@ -1,10 +1,6 @@
 function swipeRight() {
     var product = $("#container").find(".product:not(.selected)").first();
     product.addClass("selected");
-    httpGetAsync('http://localhost:8080/nextProduct', function (response) {
-        console.log(JSON.stringify(response));
-        //product.set('title', response.title);
-    });
     var win = window.open(document.getElementById('link').getAttribute('wishlistUrl'), '_blank');
     win.focus();
     //window.location.replace(document.getElementById('link').getAttribute('wishlistUrl'));
@@ -20,21 +16,22 @@ function swipeRight() {
 }
 
 function swipeLeft() {
-    var product = $("#container").find(".product:not(.selected)").first();
+    var product = $('#productCard');
     product.addClass("selected");
-    httpGetAsync('nextProduct', function (response) {
-        console.log(JSON.stringify(response));
-        //product.set('title', response.title);
+    httpGetAsync('http://localhost:8080/nextProduct', function (response) {
+        response=(JSON.parse(response));
+        console.log(document.getElementById('title').innerHTML);
+        document.getElementById('title').innerHTML = response.title;
+        console.log(document.getElementById('title').innerHTML);
+        document.getElementById('price').innerHTML =  response.price;
+        document.getElementById('link').setAttribute('wishlistUrl', response.link);
+        document.getElementById('prodImage').style.backgroundImage="url("+response.imageURL+")";
     });
-    $(product).addClass('rotate-right').delay(350).fadeOut(1);
-    if (product.is(':last-child') ) {
-        console.log("I am the last pic");
-        $(product + ':nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
-    }
-    else {
-        console.log("Last pic I am not - Yoda");
-        product.next().fadeIn(400);
-    }
+    product.addClass('rotate-right').delay(350).fadeOut(1);
+    product.removeClass('rotate-right').delay(350).fadeOut(1);
+    product.removeClass("selected");
+
+    product.fadeIn(400);
 }
 
 function wait(seconds) {
@@ -57,3 +54,5 @@ function httpGetAsync(theUrl, callback)
     xmlHttp.open("GET", theUrl, true); // true for asynchronous
     xmlHttp.send(null);
 }
+
+swipeLeft();
