@@ -41,24 +41,13 @@
   margin-left: -400px;
   cursor: w-resize;
 }
-
-.slide-up {
-  transform: translate(0px, 50px); scale(0.8);
-  transition: 1s;
-  opacity: 0;
-  margin-left: -400px;
-  cursor: n-resize;
-}
-
 .avatar {
   width: 400px;
   height: 400px;
   display: block;
   margin: 10px;
-  background-size: 100% auto !important;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #222;
+  background-size: contain !important;
+  background: transparent no-repeat center;
 }
 .like {
   border-radius: 5px;

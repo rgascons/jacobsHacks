@@ -18,10 +18,10 @@ function onFrame(frame)
                 if (oldFrame.gestures.length > 0) {
                     if(oldFrame.gestures[0].type == "swipe" && oldFrame.gestures[0].direction[0] > 0) {
                     }
-                    else swipeRight();
+                    else goEbay();
                 }
                 else {
-                    swipeRight();
+                    goEbay();
                 }
             }
             //swipe left
@@ -30,36 +30,22 @@ function onFrame(frame)
                 if (oldFrame.gestures.length > 0) {
                     if(oldFrame.gestures[0].type == "swipe" && oldFrame.gestures[0].direction[0] < 0) {
                     }
-                    else swipeLeft();
+                    else goAmazon();
                 }
                 else {
-                    swipeLeft();
-                }
-            }
-            //swipe up
-            else if(!isHorizontal && frame.gestures[0].direction[1] > 0) {
-                var oldFrame = controller.frame(1);
-                if (oldFrame.gestures.length > 0) {
-                    if(oldFrame.gestures[0].type == "swipe" && oldFrame.gestures[0].direction[1] > 0) {
-                    }
-                    else swipeUp();
-                }
-                else {
-                    swipeUp();
-                }
-            }
-            //swipe down
-            else if(!isHorizontal && frame.gestures[0].direction[1] < 0) {
-                var oldFrame = controller.frame(1);
-                if (oldFrame.gestures.length > 0) {
-                    if(oldFrame.gestures[0].type == "swipe" && oldFrame.gestures[0].direction[1] < 0) {
-                    }
-                    else swipeDown();
-                }
-                else {
-                    swipeDown();
+                    goAmazon();
                 }
             }
         }
     }
 }
+
+function goAmazon() {
+    var amazon = $('#amazon');
+    $(amazon).addClass('rotate-right').delay(350).fadeOut(1);
+    window.open ('products.html','_self',false);
+};
+
+function goEbay() {
+    alert("Ebay was not implemented... YET!");
+};
