@@ -2,10 +2,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var http = require('http');
 var config = require('./config');
-var app = express();
 var braintree = require("braintree");
 var aws = require("aws-lib");
-var beautifier = require("beautifier");
+var cors = require('cors');
+var app = express();
+
+app.use(cors());
 
 var gateway = braintree.connect({
     environment: braintree.Environment.Sandbox,
@@ -13,14 +15,6 @@ var gateway = braintree.connect({
     publicKey: config.publicKey,
     privateKey: config.privateKey
 });
-
-function getProductData() {
-
-
-    // return result ;
-    return 1;
-}
-
 
 var baseproductASIN = "B00IK01PJC";
 var baseproductASIN = "B00JLT24BY";

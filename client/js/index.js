@@ -1,7 +1,13 @@
 function swipeRight() {
     var product = $("#container").find(".product:not(.selected)").first();
     product.addClass("selected");
-
+    httpGetAsync('http://localhost:8080/nextProduct', function (response) {
+        console.log(JSON.stringify(response));
+        //product.set('title', response.title);
+    });
+    var win = window.open(document.getElementById('link').getAttribute('wishlistUrl'), '_blank');
+    win.focus();
+    //window.location.replace(document.getElementById('link').getAttribute('wishlistUrl'));
     $(product).addClass('rotate-left').delay(350).fadeOut(1);
     if (product.is(':last-child') ) {
         console.log("I am the last pic");
@@ -11,12 +17,15 @@ function swipeRight() {
         console.log("Last pic I am not - Yoda");
         product.next().fadeIn(400);
     }
-};
+}
 
 function swipeLeft() {
     var product = $("#container").find(".product:not(.selected)").first();
     product.addClass("selected");
-
+    httpGetAsync('nextProduct', function (response) {
+        console.log(JSON.stringify(response));
+        //product.set('title', response.title);
+    });
     $(product).addClass('rotate-right').delay(350).fadeOut(1);
     if (product.is(':last-child') ) {
         console.log("I am the last pic");
@@ -26,7 +35,7 @@ function swipeLeft() {
         console.log("Last pic I am not - Yoda");
         product.next().fadeIn(400);
     }
-};
+}
 
 function wait(seconds) {
     var milliseconds = seconds * 1000;
@@ -36,4 +45,15 @@ function wait(seconds) {
             break;
         }
     }
+}
+
+function httpGetAsync(theUrl, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    };
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.send(null);
 }

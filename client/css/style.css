@@ -18,7 +18,7 @@
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  color: #fff;
+  color: #080808;
   padding: 20px;
   width: 450px;
   height: 450px;
@@ -98,9 +98,8 @@
   text-shadow: none;
 }
 
-
-/* ### */
-
-.background_img {
-  background: url(http://vignette1.wikia.nocookie.net/doblaje/images/d/d8/Garfield_personaje.jpg/revision/latest?cb=20130825050919&path-prefix=es) no-repeat center center fixed;
+.h2 .p {
+  color: #080808;
+  margin-left: auto;
+  margin-right: auto
 }
