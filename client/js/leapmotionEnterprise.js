@@ -47,5 +47,7 @@ function goAmazon() {
 };
 
 function goEbay() {
-    alert("Ebay was not implemented... YET!");
+    var ebay = $('#ebay');
+    $(ebay).addClass('rotate-left').delay(350).fadeOut(1);
+    window.open ('rekt.html','_self',false);
 };
