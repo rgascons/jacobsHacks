@@ -1,9 +1,29 @@
 img {
-    max-width: 100%;
-    max-height: 100%;
 }
 
 .logo {
-    height: 200px;
-    width: 500px;
+    height:100%;
+    width: 100%;
+    background-size: contain !important;
+    background: no-repeat center;
+}
+
+.outer-div {
+    height:400px;
+    width: 400px;
+    display: inline-block;
+}
+
+.outer-outer-div {
+}
+
+body {
+    background: url(../imgs/matrix-pastillas.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+h1 {
+    color: white;
 }

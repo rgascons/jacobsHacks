@@ -41,6 +41,8 @@ function onFrame(frame)
 }
 
 function goAmazon() {
+    var amazon = $('#amazon');
+    $(amazon).addClass('rotate-right').delay(350).fadeOut(1);
     window.open ('products.html','_self',false);
 };
 
