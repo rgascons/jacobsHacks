@@ -39,14 +39,38 @@ app.get('/nextProduct', function(req, res, next) {
         ItemId: baseproductASIN2,
         MerchantId: "Amazon",
         SimilarityType: "Random",
-        ResponseGroup: "Request,Similarities,Images"
+        ResponseGroup: "Similarities"
     }, function (err, result) {
-        var items = result.Items['Item'];
-        var randItem = items[Math.floor((Math.random() * items.length))];
-        var imageURL = randItem.LargeImage.URL;
-        console.log(JSON.stringify(imageURL));
-        r = {imageURL: imageURL};
-        res.status(200).json(randItem);
+        var items1 = result.Items['Item'];
+        var randBaseItem = items1[Math.floor((Math.random() * items1.length))];
+        var relatedProductASIN = randBaseItem.SimilarProducts.SimilarProduct[0].ASIN;
+        //res.status(200).json(relatedProductASIN);
+        console.log(relatedProductASIN);
+
+        prodAdv.call("ItemLookup", {
+            ItemId: relatedProductASIN,
+            MerchantId: "Amazon",
+            IncludeReviewsSummary: "False",
+            ResponseGroup: "Request,Images,ItemAttributes"
+        }, function (err2, result2) {
+            console.log(JSON.stringify(result2));
+            var expectedItem = result2.Items.Item;
+            if (expectedItem != null) {
+                var imageURL = expectedItem.LargeImage.URL;
+                var title = expectedItem.ItemAttributes.Title;
+                var price = expectedItem.ItemAttributes.ListPrice.FormattedPrice;
+                var wishlistLink = expectedItem.ItemLinks.ItemLink[3].URL;
+                console.log(JSON.stringify(imageURL));
+                r = {
+                    title: title,
+                    imageURL: imageURL,
+                    price: price,
+                    link: wishlistLink
+                };
+                res.status(200).json(r);
+            }
+        });
+
     });
 });
 
