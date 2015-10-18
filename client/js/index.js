@@ -3,13 +3,8 @@ function swipeRight() {
     product.addClass("selected");
 
     $(product).addClass('rotate-left').delay(350).fadeOut(1);
-    if (product.is(':last-child') ) {
-        console.log("I am the last pic");
-        $(product + ':nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
-    }
-    else {
-        console.log("Last pic I am not - Yoda");
-        product.next().fadeIn(400);
+    if (!product.is(':last-child') ) {
+        product.next().fadeIn(500);
     }
 };
 
@@ -18,13 +13,8 @@ function swipeLeft() {
     product.addClass("selected");
 
     $(product).addClass('rotate-right').delay(350).fadeOut(1);
-    if (product.is(':last-child') ) {
-        console.log("I am the last pic");
-        $(product + ':nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
-    }
-    else {
-        console.log("Last pic I am not - Yoda");
-        product.next().fadeIn(400);
+    if (!product.is(':last-child') ) {
+        product.next().fadeIn(500);
     }
 };
 
@@ -33,13 +23,8 @@ function swipeUp() {
     product.addClass("selected");
 
     $(product).addClass('animated fadeOutUp').delay(1500).fadeOut(1);
-    if (product.is(':last-child') ) {
-        console.log("I am the last pic");
-        $(product + ':nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
-    }
-    else {
-        console.log("Last pic I am not - Yoda");
-        product.next().fadeIn(400);
+    if (!product.is(':last-child') ) {
+        product.next().fadeIn(500);
     }
 };
 
@@ -48,12 +33,7 @@ function swipeDown() {
     product.addClass("selected");
 
     $(product).addClass('animated fadeOutDown').delay(1500).fadeOut(1);
-    if (product.is(':last-child') ) {
-        console.log("I am the last pic");
-        $(product + ':nth-child(1)').removeClass('rotate-left rotate-right').fadeIn(300);
-    }
-    else {
-        console.log("Last pic I am not - Yoda");
-        product.next().fadeIn(400);
+    if (!product.is(':last-child') ) {
+        product.next().fadeIn(500);
     }
 };
