@@ -57,7 +57,9 @@
   margin-top: 10px;
   margin-left: 10px;
   background-size: 100% auto !important;
-  background: #222 no-repeat center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #222;
 }
 .like {
   border-radius: 5px;
@@ -95,4 +97,11 @@
   top: 50px;
   left: 40px;
   text-shadow: none;
+}
+
+
+/* ### */
+
+.background_img {
+  background: url(http://vignette1.wikia.nocookie.net/doblaje/images/d/d8/Garfield_personaje.jpg/revision/latest?cb=20130825050919&path-prefix=es) no-repeat center center fixed;
 }
