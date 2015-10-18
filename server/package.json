@@ -13,7 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-lib": "^0.3.0",
+    "beautifier": "^0.1.7",
     "body-parser": "^1.14.1",
+    "braintree": "^1.29.0",
     "express": "^4.13.3",
     "http": "0.0.0"
   }
